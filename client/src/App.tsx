@@ -14,10 +14,14 @@ import Templates from "./pages/Templates";
 import Flows from "./pages/Flows";
 import VoiceAgents from "./pages/VoiceAgents";
 import Integrations from "./pages/Integrations";
+import Setup from "./pages/Setup";
+import Pricing from "./pages/Pricing";
 
 function Router() {
   return (
     <Switch>
+      <Route path="/setup" component={Setup} />
+      <Route path="/pricing" component={Pricing} />
       <Route path="/" component={Home} />
       <Route path="/team" component={Team} />
       <Route path="/bot/:id" component={BotEditor} />

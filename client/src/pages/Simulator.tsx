@@ -97,7 +97,7 @@ export default function Simulator() {
 
   return (
     <AgencyLayout title="Simulador" subtitle="Prueba tus bots en tiempo real antes de desplegarlos.">
-      <div className="grid lg:grid-cols-[340px_1fr] gap-6 h-[calc(100vh-14rem)]">
+      <div className="grid lg:grid-cols-[340px_1fr] gap-3 md:gap-4 lg:gap-6 h-[calc(100vh-12rem)]">
         {/* ─── Config Panel ─── */}
         <div className="space-y-4 overflow-y-auto">
           {/* Bot selector */}
@@ -180,7 +180,7 @@ export default function Simulator() {
               className="glass-card rounded-2xl p-6"
             >
               <div className="flex items-center gap-4 mb-4">
-                <div className="text-3xl">{selectedBot.avatar}</div>
+                <div className="text-xl md:text-lg md:text-xl lg:text-2xl lg:text-3xl">{selectedBot.avatar}</div>
                 <div>
                   <div className="text-sm font-serif text-white">{selectedBot.name}</div>
                   <div className="text-xs text-white/30 font-light">{selectedBot.role}</div>
@@ -252,77 +252,76 @@ export default function Simulator() {
             )}
           </div>
 
-          {/* Messages */}
-          <ScrollArea className="flex-1 p-6">
-            {messages.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-full py-20 text-center">
-                <MessageSquare className="w-10 h-10 text-white/10 mb-4" />
-                <p className="text-sm text-white/20 font-light">
-                  {sessionId ? "Escribe tu primer mensaje." : "Inicia una sesión para chatear."}
-                </p>
-              </div>
-            ) : (
-              <div className="space-y-5">
-                <AnimatePresence>
-                  {messages.map((msg, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className={`flex gap-3 ${msg.role === "user" ? "flex-row-reverse" : ""}`}
-                    >
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-sm
-                        ${msg.role === "user" ? "bg-white text-black" : "bg-white/[0.06]"}`}>
-                        {msg.role === "user" ? <User className="w-3.5 h-3.5" /> : selectedBot?.avatar ?? "🤖"}
-                      </div>
-                      <div className={`max-w-[75%] flex flex-col gap-1 ${msg.role === "user" ? "items-end" : "items-start"}`}>
-                        <div className={`px-5 py-3 text-sm leading-relaxed
-                          ${msg.role === "user"
-                            ? "bg-white text-black rounded-2xl rounded-tr-md"
-                            : "bg-white/[0.04] text-white/80 rounded-2xl rounded-tl-md border border-white/[0.06]"}`}>
-                          {msg.role === "assistant" ? (
-                            <div className="prose-invert prose-sm max-w-none">
-                              <Streamdown>{msg.content}</Streamdown>
+          {/* Messages Container - Scrollable */}
+          <div className="flex-1 overflow-y-auto flex flex-col">
+            <ScrollArea className="flex-1">
+              <div className="p-6">
+                {messages.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center h-full py-20 text-center">
+                    <MessageSquare className="w-10 h-10 text-white/10 mb-4" />
+                    <p className="text-sm text-white/20 font-light">
+                      {sessionId ? "Escribe tu primer mensaje." : "Inicia una sesión para chatear."}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="space-y-5">
+                    <AnimatePresence>
+                      {messages.map((msg, idx) => (
+                        <motion.div
+                          key={idx}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className={`flex gap-3 ${msg.role === "user" ? "flex-row-reverse" : ""}`}
+                        >
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-sm ${msg.role === "user" ? "bg-white text-black" : "bg-white/[0.06]"}`}>
+                            {msg.role === "user" ? <User className="w-3.5 h-3.5" /> : selectedBot?.avatar ?? "🤖"}
+                          </div>
+                          <div className={`flex flex-col gap-1 ${msg.role === "user" ? "items-end" : "items-start"} ${msg.role === "assistant" ? "w-full" : ""}`}>
+                            <div className={`px-5 py-3 text-sm leading-relaxed ${msg.role === "user" ? "bg-white text-black rounded-2xl rounded-tr-md max-w-[75%]" : "bg-white/[0.04] text-white/80 rounded-2xl rounded-tl-md border border-white/[0.06] w-full md:max-w-[85%]"}`}>
+                              {msg.role === "assistant" ? (
+                                <div className="prose-invert prose-sm max-w-none">
+                                  <Streamdown>{msg.content}</Streamdown>
+                                </div>
+                              ) : msg.content}
                             </div>
-                          ) : msg.content}
-                        </div>
-                        {msg.responseTimeMs && (
-                          <span className="flex items-center gap-1 text-[10px] text-white/20 px-1">
-                            <Clock className="w-2.5 h-2.5" />
-                            {(msg.responseTimeMs / 1000).toFixed(1)}s
-                            {msg.model && <span>· {msg.model}</span>}
-                          </span>
-                        )}
-                      </div>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
+                            {msg.responseTimeMs && (
+                              <span className="flex items-center gap-1 text-[10px] text-white/20 px-1">
+                                <Clock className="w-2.5 h-2.5" />
+                                {(msg.responseTimeMs / 1000).toFixed(1)}s
+                                {msg.model && <span>· {msg.model}</span>}
+                              </span>
+                            )}
+                          </div>
+                        </motion.div>
+                      ))}
+                    </AnimatePresence>
 
-                {/* Typing indicator */}
-                {isTyping && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="flex gap-3"
-                  >
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm bg-white/[0.06]">
-                      {selectedBot?.avatar ?? "🤖"}
-                    </div>
-                    <div className="px-5 py-3 rounded-2xl rounded-tl-md bg-white/[0.04] border border-white/[0.06]">
-                      <div className="flex gap-1.5 items-center h-4">
-                        {[0, 1, 2].map(i => (
-                          <div key={i} className="w-1.5 h-1.5 rounded-full bg-white/30 animate-bounce"
-                            style={{ animationDelay: `${i * 0.15}s` }} />
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
+                    {/* Typing indicator */}
+                    {isTyping && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="flex gap-3"
+                      >
+                        <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm bg-white/[0.06]">
+                          {selectedBot?.avatar ?? "🤖"}
+                        </div>
+                        <div className="px-5 py-3 rounded-2xl rounded-tl-md bg-white/[0.04] border border-white/[0.06]">
+                          <div className="flex gap-1.5 items-center h-4">
+                            {[0, 1, 2].map(i => (
+                              <div key={i} className="w-1.5 h-1.5 rounded-full bg-white/30 animate-bounce" style={{ animationDelay: `${i * 0.15}s` }} />
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                    <div ref={messagesEndRef} />
+                  </div>
                 )}
-                <div ref={messagesEndRef} />
               </div>
-            )}
-          </ScrollArea>
+            </ScrollArea>
+          </div>
 
           {/* Input */}
           <div className="p-4 border-t border-white/[0.06] flex-shrink-0">

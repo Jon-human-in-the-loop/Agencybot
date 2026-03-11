@@ -300,3 +300,42 @@ export const integrationEvents = mysqlTable("integration_events", {
 
 export type IntegrationEvent = typeof integrationEvents.$inferSelect;
 export type InsertIntegrationEvent = typeof integrationEvents.$inferInsert;
+
+
+// ─── Encrypted Credentials (Admin Panel) ──────────────────────────────────────
+export const encryptedCredentials = mysqlTable("encrypted_credentials", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  service: mysqlEnum("service", [
+    "openai", "anthropic", "gemini", "groq", "ollama", "openrouter",
+    "twilio", "whatsapp", "hubspot", "mailchimp", "stripe", "google_calendar",
+    "slack", "notion", "instagram", "brevo", "pipedrive", "n8n", "make",
+    "google_sheets", "telegram", "discord", "custom"
+  ]).notNull(),
+  credentialName: varchar("credentialName", { length: 128 }).notNull(),
+  encryptedValue: text("encryptedValue").notNull(),
+  credentialHash: varchar("credentialHash", { length: 64 }).notNull(),
+  isActive: boolean("isActive").default(true),
+  lastTestedAt: timestamp("lastTestedAt"),
+  testStatus: mysqlEnum("testStatus", ["untested", "valid", "invalid", "expired"]).default("untested"),
+  metadata: json("metadata"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type EncryptedCredential = typeof encryptedCredentials.$inferSelect;
+export type InsertEncryptedCredential = typeof encryptedCredentials.$inferInsert;
+
+// ─── Admin Settings ───────────────────────────────────────────────────────────
+export const adminSettings = mysqlTable("admin_settings", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(),
+  settingKey: varchar("settingKey", { length: 128 }).notNull(),
+  settingValue: text("settingValue"),
+  isPublic: boolean("isPublic").default(false),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type AdminSetting = typeof adminSettings.$inferSelect;
+export type InsertAdminSetting = typeof adminSettings.$inferInsert;

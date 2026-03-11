@@ -128,7 +128,7 @@ export default function Flows() {
       {!selectedBotId ? (
         <div className="text-center py-32">
           <GitBranch className="w-10 h-10 text-white/10 mx-auto mb-4" />
-          <h3 className="text-2xl font-serif text-white mb-3">Selecciona un especialista</h3>
+          <h3 className="text-lg md:text-xl lg:text-2xl font-serif text-white mb-3">Selecciona un especialista</h3>
           <p className="text-white/30 text-sm font-light">Elige un bot para gestionar sus flujos conversacionales</p>
         </div>
       ) : isLoading ? (

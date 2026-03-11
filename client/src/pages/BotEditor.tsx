@@ -148,12 +148,12 @@ export default function BotEditor() {
         transition={{ duration: 0.3 }}
       >
         {activeTab === "identity" && (
-          <div className="grid lg:grid-cols-2 gap-6">
+          <div className="grid lg:grid-cols-2 gap-3 md:gap-4 lg:gap-6">
             <div className="glass-card rounded-2xl p-8">
               <span className="text-xs text-white/25 uppercase tracking-[0.15em] font-light block mb-6">Información</span>
               <div className="space-y-5">
                 <div className="flex items-center gap-5">
-                  <div className="w-16 h-16 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-3xl">
+                  <div className="w-16 h-16 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-xl md:text-lg md:text-xl lg:text-2xl lg:text-3xl">
                     {avatar}
                   </div>
                   <div>

@@ -19,6 +19,7 @@ import { processChat } from "./llm-engine";
 import { seedDatabase } from "./seed";
 import { processVoiceInput, generateTwiML, generateResponseTwiML } from "./voice-engine";
 import { INTEGRATION_CATALOG } from "./integrations-engine";
+import { setupRouter } from "./routers-setup";
 import {
   getAllVoiceAgents, getVoiceAgentById, createVoiceAgent, updateVoiceAgent,
   createVoiceCall, updateVoiceCall, getVoiceCallsByAgent,
@@ -629,6 +630,9 @@ export const appRouter = router({
       return getBotStats(input.botProfileId);
     }),
   }),
+
+  // ─── Setup / Deployment ────────────────────────────────────────────────────
+  setup: setupRouter,
 });
 
 export type AppRouter = typeof appRouter;

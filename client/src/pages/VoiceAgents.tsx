@@ -120,10 +120,10 @@ export default function VoiceAgents() {
       {agents.length === 0 ? (
         <div className="text-center py-32">
           <Phone className="w-10 h-10 text-white/10 mx-auto mb-4" />
-          <h3 className="text-2xl font-serif text-white mb-3">Sin agentes de voz</h3>
+          <h3 className="text-lg md:text-xl lg:text-2xl font-serif text-white mb-3">Sin agentes de voz</h3>
           <p className="text-white/30 text-sm font-light mb-8">Inicializa los agentes telefónicos para comenzar</p>
           <Button onClick={() => seedMutation.mutate()} disabled={seedMutation.isPending}
-            className="bg-white text-black hover:bg-white/90 rounded-full px-8 py-3">
+            className="bg-white text-black hover:bg-white/90 rounded-full px-4 md:px-6 lg:px-8 py-3">
             <Zap className="w-4 h-4 mr-2" />
             {seedMutation.isPending ? "Inicializando..." : "Inicializar Agentes"}
           </Button>
@@ -140,7 +140,7 @@ export default function VoiceAgents() {
               >
                 <div className="glass-card rounded-2xl p-7 h-full flex flex-col">
                   <div className="flex items-start justify-between mb-5">
-                    <div className="text-3xl">{agent.avatar}</div>
+                    <div className="text-xl md:text-lg md:text-xl lg:text-2xl lg:text-3xl">{agent.avatar}</div>
                     <div className="flex items-center gap-1.5">
                       <div className={`w-1.5 h-1.5 rounded-full ${agent.isActive ? "bg-emerald-500" : "bg-white/20"}`} />
                       <span className="text-[10px] text-white/25">{agent.isActive ? "Activo" : "Inactivo"}</span>
@@ -178,10 +178,10 @@ export default function VoiceAgents() {
             <DialogContent className="bg-[#0a0a0a] border-white/[0.08] max-w-lg p-0 overflow-hidden">
               {/* Call header */}
               <div className="p-6 border-b border-white/[0.06] text-center">
-                <div className="text-3xl mb-2">{activeAgent?.avatar}</div>
+                <div className="text-xl md:text-lg md:text-xl lg:text-2xl lg:text-3xl mb-2">{activeAgent?.avatar}</div>
                 <div className="text-sm font-serif text-white">{activeAgent?.name}</div>
                 <div className="text-xs text-white/30 font-light">{activeAgent?.role}</div>
-                <div className="text-2xl text-white font-mono mt-3">{formatDuration(callDuration)}</div>
+                <div className="text-lg md:text-xl lg:text-2xl text-white font-mono mt-3">{formatDuration(callDuration)}</div>
                 <div className="flex items-center justify-center gap-1.5 mt-1">
                   <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                   <span className="text-[10px] text-emerald-400/60">En llamada</span>

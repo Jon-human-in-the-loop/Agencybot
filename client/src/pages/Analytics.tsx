@@ -52,7 +52,7 @@ export default function Analytics() {
   return (
     <AgencyLayout title="Analíticas" subtitle="Métricas de rendimiento de tu agencia virtual.">
       {/* Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
         {statCards.map((stat, i) => (
           <motion.div key={stat.title}
             initial={{ opacity: 0, y: 20 }}
@@ -61,7 +61,7 @@ export default function Analytics() {
           >
             <div className="glass-card rounded-2xl p-6">
               <stat.icon className="w-5 h-5 text-white/15 mb-4" />
-              <div className="text-3xl font-serif text-white mb-1">{stat.value}</div>
+              <div className="text-xl md:text-lg md:text-xl lg:text-2xl lg:text-3xl font-serif text-white mb-1">{stat.value}</div>
               <div className="text-xs text-white/30 font-light">{stat.title}</div>
               <div className="text-[10px] text-white/15 mt-1">{stat.sub}</div>
             </div>
@@ -69,7 +69,7 @@ export default function Analytics() {
         ))}
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-6 mb-8">
+      <div className="grid lg:grid-cols-2 gap-3 md:gap-4 lg:gap-6 mb-8">
         {/* Weekly */}
         <div className="glass-card rounded-2xl p-6">
           <span className="text-xs text-white/25 uppercase tracking-[0.15em] font-light block mb-6">Actividad Semanal</span>
@@ -87,7 +87,7 @@ export default function Analytics() {
         {/* Channel */}
         <div className="glass-card rounded-2xl p-6">
           <span className="text-xs text-white/25 uppercase tracking-[0.15em] font-light block mb-6">Distribución por Canal</span>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3 md:gap-4 lg:gap-6">
             <ResponsiveContainer width="50%" height={200}>
               <PieChart>
                 <Pie data={channelData} cx="50%" cy="50%" innerRadius={55} outerRadius={80} paddingAngle={3} dataKey="value" stroke="none">
@@ -113,7 +113,7 @@ export default function Analytics() {
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid lg:grid-cols-2 gap-3 md:gap-4 lg:gap-6">
         {/* Bot activity */}
         <div className="glass-card rounded-2xl p-6">
           <span className="text-xs text-white/25 uppercase tracking-[0.15em] font-light block mb-6">Actividad por Trabajador</span>

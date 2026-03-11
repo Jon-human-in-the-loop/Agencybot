@@ -58,10 +58,10 @@ export default function Integrations() {
       {isEmpty ? (
         <div className="text-center py-32">
           <Plug className="w-10 h-10 text-white/10 mx-auto mb-4" />
-          <h3 className="text-2xl font-serif text-white mb-3">Sin integraciones</h3>
+          <h3 className="text-lg md:text-xl lg:text-2xl font-serif text-white mb-3">Sin integraciones</h3>
           <p className="text-white/30 text-sm font-light mb-8">Carga el catálogo de integraciones disponibles</p>
           <Button onClick={() => seedMutation.mutate()} disabled={seedMutation.isPending}
-            className="bg-white text-black hover:bg-white/90 rounded-full px-8 py-3">
+            className="bg-white text-black hover:bg-white/90 rounded-full px-4 md:px-6 lg:px-8 py-3">
             <Zap className="w-4 h-4 mr-2" />
             {seedMutation.isPending ? "Cargando..." : "Cargar Catálogo"}
           </Button>
@@ -69,7 +69,7 @@ export default function Integrations() {
       ) : (
         <>
           {/* Tabs */}
-          <div className="flex items-center gap-6 mb-8 border-b border-white/[0.06] pb-px">
+          <div className="flex items-center gap-3 md:gap-4 lg:gap-6 mb-8 border-b border-white/[0.06] pb-px">
             {[
               { id: "catalog" as const, label: `Catálogo (${catalog.length})` },
               { id: "connected" as const, label: `Conectadas (${connected.length})` },
@@ -119,7 +119,7 @@ export default function Integrations() {
                       transition={{ delay: i * 0.03, duration: 0.4, ease: [0.16, 1, 0.3, 1] as const }}>
                       <div className="glass-card rounded-2xl p-6 h-full flex flex-col">
                         <div className="flex items-start justify-between mb-4">
-                          <div className="text-2xl">{item.icon}</div>
+                          <div className="text-lg md:text-xl lg:text-2xl">{item.icon}</div>
                           {isConn && (
                             <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
                               <Check className="w-3 h-3 text-emerald-400" />
@@ -198,7 +198,7 @@ export default function Integrations() {
             <DialogContent className="bg-[#0a0a0a] border-white/[0.08] max-w-md">
               <DialogHeader>
                 <DialogTitle className="text-white font-serif flex items-center gap-3">
-                  <span className="text-2xl">{modal?.icon}</span>
+                  <span className="text-lg md:text-xl lg:text-2xl">{modal?.icon}</span>
                   {modal?.name}
                 </DialogTitle>
               </DialogHeader>

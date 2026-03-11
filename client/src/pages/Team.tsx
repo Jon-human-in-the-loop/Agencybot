@@ -69,12 +69,12 @@ export default function Team() {
           className="text-center py-32"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }}
         >
-          <h3 className="text-2xl font-serif text-white mb-3">Sin especialistas</h3>
+          <h3 className="text-lg md:text-xl lg:text-2xl font-serif text-white mb-3">Sin especialistas</h3>
           <p className="text-white/30 text-sm font-light mb-8">Inicializa el equipo para comenzar</p>
           <Button
             onClick={() => seedMutation.mutate()}
             disabled={seedMutation.isPending}
-            className="bg-white text-black hover:bg-white/90 rounded-full px-8 py-3"
+            className="bg-white text-black hover:bg-white/90 rounded-full px-4 md:px-6 lg:px-8 py-3"
           >
             <Zap className="w-4 h-4 mr-2" />
             Inicializar Equipo
@@ -96,7 +96,7 @@ export default function Team() {
                 <div className="glass-card rounded-2xl p-8 h-full flex flex-col relative overflow-hidden">
                   {/* Top row: avatar + toggle */}
                   <div className="flex items-start justify-between mb-6">
-                    <div className="text-4xl">{bot.avatar}</div>
+                    <div className="text-lg md:text-xl lg:text-2xl md:text-xl md:text-lg md:text-xl lg:text-2xl lg:text-3xl lg:text-4xl">{bot.avatar}</div>
                     <Switch
                       checked={bot.isActive ?? false}
                       onCheckedChange={(v) => toggleMutation.mutate({ id: bot.id, isActive: v })}
