@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1773242855791,
+      "tag": "0000_cold_maelstrom",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1773243295278,
+      "tag": "0001_charming_the_hood",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1773244409247,
+      "tag": "0002_majestic_madame_web",
+      "breakpoints": true
+    }
+  ]
+}
