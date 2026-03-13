@@ -529,13 +529,15 @@ POST /api/trpc/setup.deployToRailway
 
 ```
 1. Usuario hace click en "Login"
-2. Redirige a https://portal.manus.im/oauth/authorize
-3. Usuario se loguea con Manus
+2. Redirige a tu servidor OAuth (configurar OAUTH_SERVER_URL)
+3. Usuario se loguea en tu plataforma
 4. Redirige a /api/oauth/callback?code=...&state=...
 5. Backend intercambia code por token
 6. Backend crea sesión con cookie
 7. Usuario autenticado en el panel
 ```
+
+**Nota**: Configura `OAUTH_SERVER_URL` con tu propio dominio de autenticación
 
 ### Protección de Endpoints
 
@@ -653,8 +655,8 @@ const twiml = new validator();
 
 **Solución**:
 ```bash
-# Ver logs
-tail -f .manus-logs/devserver.log
+# Ver logs del servidor
+npm run dev 2>&1 | tee dev.log
 
 # Analizar queries lentas
 SHOW SLOW QUERY LOG;
